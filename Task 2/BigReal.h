@@ -11,6 +11,7 @@ private:
 
     bool isValidReal(string realNumber);
 
+    int sign;
 public:
     BigReal(string realNumber = "0");
 
@@ -18,27 +19,31 @@ public:
 
     void setNum(string realNumber);
 
-    pair <BigReal, BigReal> equalize(BigReal b);
+    pair <BigReal, BigReal> equalize(const BigReal &b) const;
 
     void del();
 
     int size();
 
-    int sign();
-
-    BigReal operator+(BigReal &other);
+    BigReal operator+(const BigReal &other) const;
 
     void operator+=(BigReal other);
 
-    BigReal operator-(BigReal &other);
+    BigReal operator-(const BigReal &other) const;
 
     void operator-=(BigReal other);
 
-    bool operator<(BigReal &other);
+    bool operator<(const BigReal &other) const;
 
-    bool operator>(BigReal &other);
+    bool operator>(const BigReal &other) const;
 
-    bool operator==(BigReal &other);
+    bool operator>=(const BigReal &other) const;
+
+    bool operator<=(const BigReal &other) const;
+
+    bool operator!=(const BigReal &other) const;
+
+    bool operator==(const BigReal &other) const;
 
     friend ostream &operator<<(ostream &out, BigReal other);
 };
