@@ -23,7 +23,7 @@ int main() {
                 cout <<" "<<check[j].first << " " << check[j].second << " ";
                 if (j < 10) {
                     cout << (check[j].second) * 3;
-                } else if (i < 20) {
+                } else if (j < 20) {
                     cout << (check[j].second) * 2;
                 } else {
                     cout << check[j].second << " ";
