@@ -19,6 +19,15 @@ BigReal::BigReal(string realNumber) {
     s = realNumber;
 }
 
+void BigReal::del() {
+    string c = (*this).s;
+    if (c[c.size() - 2] == '.' && c[c.size() - 1] == '0') {
+        c.pop_back();
+        c.pop_back();
+    }
+    (*this).s = c;
+}
+
 int BigReal::size() {
     return s.size();
 }
@@ -102,14 +111,20 @@ BigReal BigReal::operator+(BigReal &other) {
     }
     if (carry)c.push_back(carry + '0');
     reverse(c.begin(), c.end());
-    if (c[c.size() - 2] == '.') {
+    if (c[c.size() - 2] == '.' && c[c.size() - 1] == '0') {
         c.pop_back();
         c.pop_back();
     }
     return c;
 }
 
+void BigReal::operator+=(BigReal other) {
+    *this = *this + other;
+}
+
 ostream &operator<<(ostream &out, BigReal other) {
-    out << other.s;
+    BigReal x = other;
+    x.del();
+    out << x.s;
     return out;
 }
