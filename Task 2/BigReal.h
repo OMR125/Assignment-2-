@@ -29,9 +29,13 @@ public:
 
     void operator+=(BigReal other);
 
+    void operator++();
+
     BigReal operator-(const BigReal &other) const;
 
     void operator-=(BigReal other);
+
+    void operator--();
 
     bool operator<(const BigReal &other) const;
 
@@ -46,6 +50,8 @@ public:
     bool operator==(const BigReal &other) const;
 
     friend ostream &operator<<(ostream &out, BigReal other);
+
+    friend istream &operator>>(istream &in, BigReal other);
 };
 
 
