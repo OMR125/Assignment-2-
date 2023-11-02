@@ -12,7 +12,7 @@ private:
     bool isValidReal(string realNumber);
 
 public:
-    BigReal(string realNumber);
+    BigReal(string realNumber = "0");
 
     BigReal(const BigReal &other);
 
@@ -20,13 +20,19 @@ public:
 
     pair <BigReal, BigReal> equalize(BigReal b);
 
+    void del();
+
     int size();
 
     int sign();
 
     BigReal operator+(BigReal &other);
 
+    void operator+=(BigReal other);
+
     BigReal operator-(BigReal &other);
+
+    void operator-=(BigReal other);
 
     bool operator<(BigReal &other);
 
