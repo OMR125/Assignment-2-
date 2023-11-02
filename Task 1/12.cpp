@@ -36,7 +36,7 @@ int main() {
         if(i<10) {
             sum+=((check[i].second) * 3);
         }
-        else if(i>9&&i<20) {
+        else if(i<20) {
             sum+=((check[i].second) * 2);
         }
         else
