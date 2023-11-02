@@ -9,17 +9,14 @@ void BigReal::setNum(string realNumber) {
     if (realNumber.find('.') == string::npos) {
         realNumber += string(".0");
     }
-    if (realNumber.find('-') != string::npos) {
-        if (realNumber.substr(1)[0] == '.')
-            s = '0' + realNumber.substr(1);
-        else
-            s = realNumber.substr(1);
-        sign = 0;
-    } else {
-        if (realNumber[0] == '.')realNumber = '0' + realNumber;
-        s = realNumber;
-        sign = 1;
+    sign = 1;
+    if (realNumber[0] == '+' || realNumber[0] == '-') {
+        sign = (realNumber[0] == '-' ? 0 : 1);
+        realNumber = realNumber.substr(1);
     }
+    if (realNumber[0] == '.')
+        realNumber = '0' + realNumber;
+    s = realNumber;
 }
 
 BigReal::BigReal(const BigReal &other) {
@@ -31,13 +28,14 @@ BigReal::BigReal(string realNumber) {
     if (realNumber.find('.') == string::npos) {
         realNumber += string(".0");
     }
-    if (realNumber.find('-') != string::npos) {
-        s = realNumber.substr(1);
-        sign = 0;
-    } else {
-        s = realNumber;
-        sign = 1;
+    sign = 1;
+    if (realNumber[0] == '+' || realNumber[0] == '-') {
+        sign = (realNumber[0] == '-' ? 0 : 1);
+        realNumber = realNumber.substr(1);
     }
+    if (realNumber[0] == '.')
+        realNumber = '0' + realNumber;
+    s = realNumber;
 }
 
 void BigReal::del() {
@@ -91,16 +89,16 @@ bool BigReal::operator!=(const BigReal &other) const {
 pair <BigReal, BigReal> BigReal::equalize(const BigReal &temp) const {
     BigReal a = *this;
     BigReal b = temp;
-    int beforea = 0, aftera = 0;
-    int beforeb = 0, afterb = 0;
+    int before_a = 0, after_a = 0;
+    int before_b = 0, after_b = 0;
     bool flag = 1;
     for (int i = 0; i < a.size(); i++) {
         if (a.s[i] == '.') {
             flag = 0;
             continue;
         }
-        if (flag)beforea++;
-        else aftera++;
+        if (flag)before_a++;
+        else after_a++;
     }
     flag = 1;
     for (int i = 0; i < b.size(); i++) {
@@ -108,17 +106,17 @@ pair <BigReal, BigReal> BigReal::equalize(const BigReal &temp) const {
             flag = 0;
             continue;
         }
-        if (flag)beforeb++;
-        else afterb++;
+        if (flag)before_b++;
+        else after_b++;
     }
-    if (beforea < beforeb) {
-        a.s = string(beforeb - beforea, '0') + a.s;
+    if (before_a < before_b) {
+        a.s = string(before_b - before_a, '0') + a.s;
     } else
-        b.s = string(beforea - beforeb, '0') + b.s;
-    if (aftera < afterb) {
-        a.s += string(afterb - aftera, '0');
+        b.s = string(before_a - before_b, '0') + b.s;
+    if (after_a < after_b) {
+        a.s += string(after_b - after_a, '0');
     } else
-        b.s += string(aftera - afterb, '0');
+        b.s += string(after_a - after_b, '0');
     BigReal x(a);
     x.sign = (*this).sign;
     BigReal y(b);
