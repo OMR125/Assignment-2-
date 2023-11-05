@@ -1,10 +1,10 @@
 // File: Task 2
-// Purpose: perform operations on two big real numbers
+// Purpose: Perform operations on two big real numbers
 
 // Author: Omar Mahfouz Mohammed
 // Section: S3/4
 // ID: 20220229
-// TA: belal tarek
+// TA: Belal Tarek
 // Date: Nov 4 2023
 
 // Author: Medhat Ahmed Abdelkarim
