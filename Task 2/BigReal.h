@@ -1,18 +1,17 @@
 // File: task 2
 // Purpose: perform operations on two big real numbers
 
-
-// Author: omar mahfouz mohammed
-// Section: s3/4
+// Author: Omar Mahfouz Mohammed
+// Section: S3/4
 // ID: 20220229
-// TA: belal tarek
-// Date: nov 4 2023
+// TA: Belal Tarek
+// Date: Nov 4 2023
 
-// Author: medhat ahmed abdelkarim
-// Section: s3/4
+// Author: Medhat Ahmed Abdelkarim
+// Section: S3/4
 // ID: 20220456
-// TA: belal tarek
-// Date: nov 4 2023
+// TA: Belal Tarek
+// Date: Nov 4 2023
 
 //--------------------------------------------------------------------//
 #include <bits./stdc++.h>
