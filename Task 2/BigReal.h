@@ -45,13 +45,9 @@ public:
 
     void operator+=(BigReal other);
 
-    BigReal operator++();
-
     BigReal operator-(const BigReal &other) const;
 
     void operator-=(BigReal other);
-
-    BigReal operator--();
 
     bool operator<(const BigReal &other) const;
 
