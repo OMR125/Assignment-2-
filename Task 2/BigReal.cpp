@@ -1,7 +1,6 @@
 // File: Task 2
 // Purpose: perform operations on two big real numbers
 
-
 // Author: Omar Mahfouz Mohammed
 // Section: S3/4
 // ID: 20220229
@@ -70,7 +69,7 @@ void BigReal::setNum(string Number) {// setting the number and checking if it is
     }
 }
 
-BigReal::BigReal(const BigReal &other) { // storing the sign of the number(+,-)
+BigReal::BigReal(const BigReal &other) { // the copy constructor
     s = other.s;
     sign = other.sign;
 }
@@ -95,15 +94,15 @@ bool BigReal::operator==(const BigReal &other) const {// check if both numbers a
     return s == other.s && sign == other.sign;
 }
 
-bool BigReal::operator!=(const BigReal &other) const {//check if the two numbers are not equal and returning the result
+bool BigReal::operator!=(const BigReal &other) const {//check if the two numbers are not equal and return the result
     return !(*this == other);
 }
 
-bool BigReal::operator>(const BigReal &other) const {// checking to see if the number is bigger than  the other number by checking the sign first and then inspecting the two numbers
+bool BigReal::operator>(const BigReal &other) const {// checking to see if the number is bigger than the other number by checking the sign first and then inspecting the two numbers
     if (sign != other.sign) // checking if the other number is negative
         return sign > other.sign;
     pair <BigReal, BigReal> temp = equalize(other);// equalizing so that we can work
-    string a = temp.first.s; // storing the two numbers as pairs
+    string a = temp.first.s; // storing the two numbers from the equalized pair
     string b = temp.second.s;
     for (int i = 0; i < a.size(); i++) { // comparing the two numbers
         if (a[i] > b[i])
@@ -114,7 +113,7 @@ bool BigReal::operator>(const BigReal &other) const {// checking to see if the n
     return false;
 }
 
-bool BigReal::operator>=(const BigReal &other) const {// checking to see if the number is bigger than or equal than the other number and then returning the result
+bool BigReal::operator>=(const BigReal &other) const {// checking to see if the number is bigger than or equal to the other number and then returning the result
     return *this > other || *this == other;
 }
 
@@ -122,7 +121,7 @@ bool BigReal::operator<(const BigReal &other) const { // checking to see if the 
     return other > *this;
 }
 
-bool BigReal::operator<=(const BigReal &other) const {// checking to see if the number is less than or equal than the other number and then returning the result
+bool BigReal::operator<=(const BigReal &other) const {// checking to see if the number is less than or equal to the other number and then returning the result
     return *this < other || *this == other;
 }
 
@@ -179,18 +178,16 @@ BigReal BigReal::operator+(const BigReal &other) const {
             c.push_back('.');
             continue;
         }
-        int digit1 = a[i] - '0'; // we minus the value that we get as string from zero so that we can get the original value as  an integer
+        int digit1 = a[i] - '0'; // converting the digits to int
         int digit2 = b[i] - '0';
-        int sum = digit1 + digit2 + carry;// we add the two digits plus the carry
-        carry = sum / 10;// if we have carry we use this so that it can get us the whole number without any decimals
-        sum %= 10;// then we use the variable(sum) so that we can get the remaining part of the whole number we dismissed in the previous step
-        c.push_back(sum + '0');// we are adding the remaining part to the result  and then we add zero to make it a string again
+        int sum = digit1 + digit2 + carry ; // we add the two digits and the carry
+        carry = sum / 10; // if we have a carry we use this so that it can get us the whole number without any decimals
+        sum %= 10; // then we use the variable(sum) so that we can get the remaining part of the whole number we dismissed in the previous step
+        c.push_back(sum + '0'); // pushback the answer and make it a charachter
     }
     if (carry)c.push_back(carry + '0');
-    reverse(c.begin(), c.end());// reversing because we push back while working on the first numbers from the left and push back function store it from the right.
+    reverse(c.begin(), c.end()); //  reverse because i was pushing back not pushing front
     return BigReal(c);
-    // resetting the sign to the result and then returning it
-   
 }
 
 BigReal BigReal::operator-(const BigReal &other) const {
@@ -249,32 +246,32 @@ BigReal BigReal::operator-(const BigReal &other) const {
     return ans;
 }
 
-void BigReal::operator+=(BigReal other) {//decrease the value of the number by (other) and then assign the value to the original variable
+void BigReal::operator+=(BigReal other) { //decrease the value of the number by (other) and then assign the value to the original variable
     *this = *this + other;
 }
 
-void BigReal::operator-=(BigReal other) {//decrease the value of the number by (other) and then assign the value to the original variable
+void BigReal::operator-=(BigReal other) { //decrease the value of the number by (other) and then assign the value to the original variable
     *this = *this - other;
 }
 
-BigReal BigReal::operator++() { // increasing the desired number by 1
-    *this = *this + BigReal("1.0"); // add 1 to the number
+BigReal BigReal::operator++() { // pre incrementing the number by 1
+    *this = *this + BigReal("1.0"); // adding 1 to the number
     return *this;
 }
 
-BigReal BigReal::operator--() { // decreasing the desired number by 1
-    *this = *this - BigReal("1.0");// minus the number by1
+BigReal BigReal::operator--() { // pre decrementing the number by 1
+    *this = *this - BigReal("1.0"); // subtracting the number by 1
     return *this;
 }
 
-ostream &operator<<(ostream &out, BigReal other) {// input the desired number without using setters
+ostream &operator<<(ostream &out, BigReal other) { // output the desired number without using getters
     BigReal x = other;
     if (!x.sign)out << '-';
     out << x.s;
     return out;
 }
 
-istream &operator>>(istream &in, BigReal &other) { // output the desired number without using getters
+istream &operator>>(istream &in, BigReal &other) { // input the desired number without using setters
     string temp;
     in >> temp;
     other.setNum(temp);
