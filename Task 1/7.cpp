@@ -6,7 +6,7 @@ struct dominoT {
     int leftDots, rightDots;
 };
 
-void FormsDominoChain(vector <dominoT> tiles, int n, vector<int> positions) {
+bool FormsDominoChain(vector <dominoT> tiles, int n, vector<int> positions) {
     do {
         vector <dominoT> order;
         for (int i = 0; i < n; i++)
@@ -26,10 +26,11 @@ void FormsDominoChain(vector <dominoT> tiles, int n, vector<int> positions) {
                 if (i > 0)cout << " ";
                 cout << l << '|' << r << " " << "-\n"[i == n - 1];
             }
-            return;
+            return true;
         }
     } while (next_permutation(positions.begin(), positions.end()));
     cout << "It's impossible to link all the dominos together\n";
+    return false;
 }
 
 int main() {
