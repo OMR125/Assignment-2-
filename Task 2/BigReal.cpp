@@ -1,8 +1,16 @@
 #include <bits./stdc++.h>
-#include "BigReal.h"
+#include "bigReal.h"
 
 bool BigReal::isValidReal(string realNumber) {
-
+    int count = 0;
+    for (int i = 0; i < realNumber.length(); ++i) {
+        if (realNumber[i] == '.') {
+            count++;
+        } else if (!(realNumber[i] >= '0' && realNumber[i] <= '9')) {
+            return false;
+        }
+    }
+    return count < 2;
 }
 
 void BigReal::setNum(string realNumber) {
@@ -16,7 +24,10 @@ void BigReal::setNum(string realNumber) {
     }
     if (realNumber[0] == '.')
         realNumber = '0' + realNumber;
-    s = realNumber;
+    if (!isValidReal(realNumber))
+        s = "0.0";
+    else
+        s = realNumber;
 }
 
 BigReal::BigReal(const BigReal &other) {
@@ -35,17 +46,23 @@ BigReal::BigReal(string realNumber) {
     }
     if (realNumber[0] == '.')
         realNumber = '0' + realNumber;
-    s = realNumber;
+    if (!isValidReal(realNumber))
+        s = "0.0";
+    else
+        s = realNumber;
 }
 
 void BigReal::del() {
-    string c = (*this).s;
-    if (c[c.size() - 2] == '.' && c[c.size() - 1] == '0') {
-        c.pop_back();
-        c.pop_back();
-    }
-    (*this).s = c;
+    while (s[0] == '0' && s[1] != '.')
+        s.erase(s.begin(), s.begin() + 1);
+
+    while (s.back() == '0')
+        s.pop_back();
+
+    if (s.back() == '.')
+        s.pop_back();
 }
+
 
 int BigReal::size() {
     return s.size();
@@ -226,4 +243,21 @@ ostream &operator<<(ostream &out, BigReal other) {
     if (!x.sign)out << '-';
     out << x.s;
     return out;
+}
+
+BigReal BigReal::operator++() {
+    *this = *this + BigReal("1.0");
+    return *this;
+}
+
+BigReal BigReal::operator--() {
+    *this = *this - BigReal("1.0");
+    return *this;
+}
+
+istream &operator>>(istream &in, BigReal &other) {
+    string temp;
+    in >> temp;
+    other.setNum(temp);
+    return in;
 }
