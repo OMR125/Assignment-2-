@@ -4,13 +4,12 @@
 using namespace std;
 
 int main() {
-    BigReal x("11.9000000000000000000000000000000001");
-    BigReal y("2333333333339.1134322222222292");
-    BigReal z = x + y;
-    cout << (x == y) << "\n";
-    cout << (x > y) << "\n";
-    cout << (x < y) << "\n";
-    cout << z << "\n";
-    z += BigReal("5");
-    cout << z << "\n";
+    BigReal n1;
+    BigReal n2("13.0000456");
+    cin >> n1;
+    n2 += n1;
+    n1 -= BigReal("139088.9008");
+    BigReal n3 = n1 + n2;
+    n3 = n3 - n1;
+    cout << ++n1 << " " << ++n2 << " " << --n3;
 }
