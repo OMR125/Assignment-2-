@@ -34,7 +34,8 @@ BigReal::BigReal(string Number) {// constructor that does the same as the setter
     if (Number.find('.') == string::npos)
         Number += string(".0");
 
-    if (Number[0] == '+' || Number[0] == '-') {// we are storing the sign away by taking it from the string so it can give us some flexibility while doing other operations
+    if (Number[0] == '+' || Number[0] ==
+                            '-') {// we are storing the sign away by taking it from the string so it can give us some flexibility while doing other operations
         sign = (Number[0] == '-' ? 0 : 1);
         Number = Number.substr(1);
     }
@@ -49,12 +50,14 @@ BigReal::BigReal(string Number) {// constructor that does the same as the setter
     }
 }
 
-void BigReal::setNum(string Number) {// setting the number and checking if it is valid or not while also deleting extra zeros
+void
+BigReal::setNum(string Number) {// setting the number and checking if it is valid or not while also deleting extra zeros
     sign = 1;
     if (Number.find('.') == string::npos)
         Number += string(".0");
 
-    if (Number[0] == '+' || Number[0] == '-') {// we are storing the sign away by taking it from the string so it can give us some flexibility while doing other operations
+    if (Number[0] == '+' || Number[0] ==
+                            '-') {// we are storing the sign away by taking it from the string so it can give us some flexibility while doing other operations
         sign = (Number[0] == '-' ? 0 : 1);
         Number = Number.substr(1);
     }
@@ -74,7 +77,8 @@ BigReal::BigReal(const BigReal &other) { // the copy constructor
     sign = other.sign;
 }
 
-void BigReal::del() {// we are deleting the extra zeros from both sides that might be extra and does not hold any meaning or value
+void
+BigReal::del() {// we are deleting the extra zeros from both sides that might be extra and does not hold any meaning or value
 
     while (s[0] == '0' && s[1] != '.') // delete extra zeros from the right but leaving the last zero
         s.erase(s.begin(), s.begin() + 1);
@@ -90,7 +94,8 @@ int BigReal::size() {
     return s.size();
 }
 
-bool BigReal::operator==(const BigReal &other) const {// check if both numbers are equal by comparing the signs and the numbers themselves
+bool BigReal::operator==(
+        const BigReal &other) const {// check if both numbers are equal by comparing the signs and the numbers themselves
     return s == other.s && sign == other.sign;
 }
 
@@ -98,7 +103,8 @@ bool BigReal::operator!=(const BigReal &other) const {//check if the two numbers
     return !(*this == other);
 }
 
-bool BigReal::operator>(const BigReal &other) const {// checking to see if the number is bigger than the other number by checking the sign first and then inspecting the two numbers
+bool BigReal::operator>(
+        const BigReal &other) const {// checking to see if the number is bigger than the other number by checking the sign first and then inspecting the two numbers
     if (sign != other.sign) // checking if the other number is negative
         return sign > other.sign;
     pair <BigReal, BigReal> temp = equalize(other);// equalizing so that we can work
@@ -113,19 +119,23 @@ bool BigReal::operator>(const BigReal &other) const {// checking to see if the n
     return false;
 }
 
-bool BigReal::operator>=(const BigReal &other) const {// checking to see if the number is bigger than or equal to the other number and then returning the result
+bool BigReal::operator>=(
+        const BigReal &other) const {// checking to see if the number is bigger than or equal to the other number and then returning the result
     return *this > other || *this == other;
 }
 
-bool BigReal::operator<(const BigReal &other) const { // checking to see if the number is less than the other number and then returning the result
+bool BigReal::operator<(
+        const BigReal &other) const { // checking to see if the number is less than the other number and then returning the result
     return other > *this;
 }
 
-bool BigReal::operator<=(const BigReal &other) const {// checking to see if the number is less than or equal to the other number and then returning the result
+bool BigReal::operator<=(
+        const BigReal &other) const {// checking to see if the number is less than or equal to the other number and then returning the result
     return *this < other || *this == other;
 }
 
-pair <BigReal, BigReal> BigReal::equalize(const BigReal &temp) const { // we are making both numbers equal in length by adding zeros so that we can work freely
+pair <BigReal, BigReal> BigReal::equalize(
+        const BigReal &temp) const { // we are making both numbers equal in length by adding zeros so that we can work freely
     BigReal a = *this;
     BigReal b = temp;
     int before_a = 0, after_a = 0;
@@ -180,7 +190,7 @@ BigReal BigReal::operator+(const BigReal &other) const {
         }
         int digit1 = a[i] - '0'; // converting the digits to int
         int digit2 = b[i] - '0';
-        int sum = digit1 + digit2 + carry ; // we add the two digits and the carry
+        int sum = digit1 + digit2 + carry; // we add the two digits and the carry
         carry = sum / 10; // if we have a carry we use this so that it can get us the whole number without any decimals
         sum %= 10; // then we use the variable(sum) so that we can get the remaining part of the whole number we dismissed in the previous step
         c.push_back(sum + '0'); // pushback the answer and make it a charachter
@@ -246,22 +256,14 @@ BigReal BigReal::operator-(const BigReal &other) const {
     return ans;
 }
 
-void BigReal::operator+=(BigReal other) { //decrease the value of the number by (other) and then assign the value to the original variable
+void BigReal::operator+=(
+        BigReal other) { //decrease the value of the number by (other) and then assign the value to the original variable
     *this = *this + other;
 }
 
-void BigReal::operator-=(BigReal other) { //decrease the value of the number by (other) and then assign the value to the original variable
+void BigReal::operator-=(
+        BigReal other) { //decrease the value of the number by (other) and then assign the value to the original variable
     *this = *this - other;
-}
-
-BigReal BigReal::operator++() { // pre incrementing the number by 1
-    *this = *this + BigReal("1.0"); // adding 1 to the number
-    return *this;
-}
-
-BigReal BigReal::operator--() { // pre decrementing the number by 1
-    *this = *this - BigReal("1.0"); // subtracting the number by 1
-    return *this;
 }
 
 ostream &operator<<(ostream &out, BigReal other) { // output the desired number without using getters
