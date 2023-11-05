@@ -29,11 +29,11 @@ private:
 
     int sign;
 public:
-    BigReal(string realNumber = "0");
+    BigReal(string Number = "0",bool change = 1);
 
     BigReal(const BigReal &other);
 
-    void setNum(string realNumber);
+    void setNum(string Number = "0",bool change = 1);
 
     pair <BigReal, BigReal> equalize(const BigReal &b) const;
 
