@@ -1,30 +1,33 @@
-// File: task 2
+// File: Task 2
 // Purpose: perform operations on two big real numbers
 
-
-// Author: omar mahfouz mohammed
-// Section: s3/4
+// Author: Omar Mahfouz Mohammed
+// Section: S3/4
 // ID: 20220229
-// TA: belal tarek
-// Date: nov 4 2023
+// TA: Belal Tarek
+// Date: Nov 4 2023
 
-// Author: medhat ahmed abdelkarim
-// Section: s3/4
+// Author: Medhat Ahmed Abdelkarim
+// Section: S3/4
 // ID: 20220456
-// TA: belal tarek
-// Date: nov 4 2023
+// TA: Belal Tarek
+// Date: Nov 4 2023
 
 //--------------------------------------------------------------------//
 #include <bits./stdc++.h>
 #include "BigReal.h"
+
 using namespace std;
+
 int main() {
-    BigReal n1;
-    BigReal n2("13.0000456");
-    cin>>n1;
-    n2+=n1;
-    n1-=BigReal("139088.9008");
-    BigReal n3 = n1 + n2;
-    n3=n3-n1;
-    cout << ++n1<<" "<<++n2<<" "<<--n3;
+    BigReal a("0.1243546000");
+    BigReal b;
+    b.setNum("-999999999999999999999999999999.99999999999");
+    BigReal c = b;
+    BigReal d = c + a;
+    BigReal e = a - d;
+    e += BigReal("-503429.7832");
+    d -= BigReal("-91213.00000003");
+    cout << --e << " " << ++d << "\n";
+    cout << (e > d) << " " << (a == b) << " " << (c != c) << "\n";
 }
