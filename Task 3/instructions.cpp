@@ -23,11 +23,13 @@ void instructions::MovePattern(string reg[], string s) {
 void instructions::Add(string reg[], string s) {
     int carry = 0;
     string result;
-    string bit1 = reg[HexToInt(string(1, s[2]))];
-    string bit2 = reg[HexToInt(string(1, s[3]))];
+    int bit1 = HexToInt(reg[HexToInt(string(1, s[2]))]);
+    int bit2 = HexToInt(reg[HexToInt(string(1, s[3]))]);
+    bitset<8>bitset1(bit1);
+    bitset<8>bitset2(bit2);
     for (int i = 0; i < 8; ++i) {
-        int bit_a = bit1[i] - '0';
-        int bit_b = bit2[i] - '0';
+        int bit_a = bitset1[i];
+        int bit_b = bitset2[i];
         int sum = bit_a + bit_b + carry;
         int bit = sum % 2;
         carry = sum / 2;
@@ -42,9 +44,11 @@ void instructions::Add(string reg[], string s) {
         check = false;
     }
     reverse(result.begin(), result.end());
+    bitset<8>bitset3(result);
+    int result2=bitset3.to_ulong();
     if (!check) {
-        reg[HexToInt(string(1, s[1]))] = "-";
-        reg[HexToInt(string(1, s[1]))] += result;
+        reg[HexToInt(string(1, s[1]))] += "-";
+        reg[HexToInt(string(1, s[1]))] += result2;
     } else
-        reg[HexToInt(string(1, s[1]))] = result;
+        reg[HexToInt(string(1, s[1]))] = result2;
 }
