@@ -14,6 +14,8 @@ public:
     void StorePattern(string reg[], string cell[], string s);
 
     void MovePattern(string reg[], string s);
+
+    void Add(string reg[],string cell[],string s);
 };
 
 
