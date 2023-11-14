@@ -9,13 +9,13 @@ class instructions : public Hexa {
 public:
     void LoadAddress(string reg[], string cell[], string s);
 
-    void LoadPattern(string reg[], string cell[], string s);
+    void LoadPattern(string reg[],string s);
 
     void StorePattern(string reg[], string cell[], string s);
 
     void MovePattern(string reg[], string s);
 
-    void Add(string reg[],string cell[],string s);
+    void Add(string reg[],string s);
 };
 
 
