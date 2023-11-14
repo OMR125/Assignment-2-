@@ -11,14 +11,17 @@ void machine::work() {
         string x;
         x += a.cell[i];
         x += a.cell[i + 1];
-        if (a.cell[i][0] == '1')
+        char op = a.cell[i][0];
+        if (op == '1')
             b.LoadAddress(c.reg, a.cell, x);
-        else if (a.cell[i][0] == '2')
-            b.LoadPattern(c.reg, a.cell, x);
-        else if (a.cell[i][0] == '3')
+        else if (op == '2')
+            b.LoadPattern(c.reg, x);
+        else if (op == '3')
             b.StorePattern(c.reg, a.cell, x);
-        else if (a.cell[i][0] == '4')
+        else if (op == '4')
             b.MovePattern(c.reg, x);
+        else if (op == '5')
+            b.Add(c.reg, x);
         else if (a.cell[i][0] == 'B') {
             if (c.reg[HexToInt(string(1, x[1]))] == c.reg[0])
                 i = HexToInt(x.substr(2)) - 2;
@@ -26,11 +29,11 @@ void machine::work() {
             break;
 
     }
-//    for (auto c: a.cell) {
-//        cout << c << "\n";
-//    }
-//    cout << "\n";
-//    for (auto c: c.reg) {
-//        cout << "0x" << c << "\n";
-//    }
+    for (auto c: a.cell) {
+        cout << c << "\n";
+    }
+    cout << "\n";
+    for (auto c: c.reg) {
+        cout << "0x" << c << "\n";
+    }
 }
