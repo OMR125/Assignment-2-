@@ -10,7 +10,7 @@ public:
         char ToHex[10];
         snprintf(ToHex, sizeof ToHex, "%X", n);
         string temp = ToHex;
-        return string(temp.size() == 1 ? "0" : "", 1) + temp;
+        return string(temp.size() == 1 ? "0" : "", temp.size() == 1 ? 1 : 0) + temp;
     }
 
     int HexToInt(string s) {
