@@ -9,7 +9,8 @@ public:
     string IntToHex(int x) {
         char s[10];
         snprintf(s, sizeof s, "%X", x);
-        return string("0x") + s;
+        string z = s;
+        return string(z.size()==1?"0":"",1) + z;
     }
 
     int HexToInt(string s) {
