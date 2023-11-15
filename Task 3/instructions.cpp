@@ -36,12 +36,19 @@ void instructions::Add(string reg[], string s) {
         carry = sum / 2;
         result.push_back(bit + '0');
     }
-    if(carry==1){
+    if(result[0]==1){
         check=false;
     }
     reverse(result.begin(),result.end());
     bitset<8>bitset3(result);
-    int result2= bitset3.to_ulong();
+    int result2;
+    if(!check) {
+        result2 = bitset3.to_ulong();
+        result2 -= 16;
+    }
+    else
+        result2 = bitset3.to_ulong();
+
     reg[HexToInt(string(1, s[1]))] = IntToHex(result2);
 
 }
