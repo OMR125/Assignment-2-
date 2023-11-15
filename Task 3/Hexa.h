@@ -6,11 +6,11 @@ using namespace std;
 
 class Hexa {
 public:
-    string IntToHex(int x) {
-        char s[10];
-        snprintf(s, sizeof s, "%X", x);
-        string z = s;
-        return string(z.size()==1?"0":"",1) + z;
+    string IntToHex(int n) {
+        char ToHex[10];
+        snprintf(ToHex, sizeof ToHex, "%X", n);
+        string temp = ToHex;
+        return string(temp.size() == 1 ? "0" : "", 1) + temp;
     }
 
     int HexToInt(string s) {
