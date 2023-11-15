@@ -8,11 +8,11 @@
 
 class machine : public Hexa {
 public:
-    memory a;
-    instructions b;
-    registers c;
+    memory mem;
+    instructions inst;
+    registers regs;
 
-    void work();
+    void run();
 };
 
 
