@@ -1,12 +1,11 @@
-#include "memory.h"
 #include <bits./stdc++.h>
+#include "memory.h"
 
 using namespace std;
 
 void memory::fill() {
-    for (int i = 0; i < 256; i++) {
+    for (int i = 0; i < 256; i++)
         cell[i] = "00";
-    }
 }
 
 void memory::fetch(string filename) {
