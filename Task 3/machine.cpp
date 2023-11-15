@@ -1,39 +1,38 @@
 #include "machine.h"
 
-void machine::work() {
-    a.fill();
-    c.fill();
+void machine::run() {
+    mem.fill();
+    regs.fill();
     string name;
-    cout << "Please Enter File name:";
+    cout << "Please enter the File's name:";
     cin >> name;
-    a.fetch(name);
+    mem.fetch(name);
     for (int i = 0; i < 256; i += 2) {
         string x;
-        x += a.cell[i];
-        x += a.cell[i + 1];
-        char op = a.cell[i][0];
+        x += mem.cell[i];
+        x += mem.cell[i + 1];
+        char op = mem.cell[i][0];
         if (op == '1')
-            b.LoadAddress(c.reg, a.cell, x);
+            inst.LoadAddress(regs.reg, mem.cell, x);
         else if (op == '2')
-            b.LoadPattern(c.reg, x);
+            inst.LoadPattern(regs.reg, x);
         else if (op == '3')
-            b.StorePattern(c.reg, a.cell, x);
+            inst.StorePattern(regs.reg, mem.cell, x);
         else if (op == '4')
-            b.MovePattern(c.reg, x);
+            inst.MovePattern(regs.reg, x);
         else if (op == '5')
-            b.Add(c.reg, x);
-        else if (a.cell[i][0] == 'B') {
-            if (c.reg[HexToInt(string(1, x[1]))] == c.reg[0])
+            inst.Add(regs.reg, x);
+        else if (mem.cell[i][0] == 'B') {
+            if (regs.reg[HexToInt(string(1, x[1]))] == regs.reg[0])
                 i = HexToInt(x.substr(2)) - 2;
-        } else if (a.cell[i][0] == 'C')
+        } else if (mem.cell[i][0] == 'C')
             break;
-
     }
-    for (auto c: a.cell) {
-        cout << c << "\n";
-    }
-    cout << "\n";
-    for (auto c: c.reg) {
+    cout << "\nMEMORY:\n";
+    for (auto c: mem.cell)
         cout << "0x" << c << "\n";
-    }
+
+    cout << "\nRegisters:\n";
+    for (auto r: regs.reg)
+        cout << "0x" << r << "\n";
 }
